@@ -1,0 +1,75 @@
+{
+  "projektname": "selbstbestimmte-browser-automatisierung",
+  "versionsnummer": "1.0.3",
+  "privat": true,
+  "projektbeschreibung": "Souveränes Beispielprojekt für Browser-Automatisierung mit Selenium WebDriver unter Node.js. Standardmäßig vollständig lokal ausgeführt – keine erzwungene Cloud-Teilnahme, keine Telemetrie an Dritte, keine Abhängigkeit von zentralisierten SaaS-Anbietern (ehem. LambdaTest/TestMu AI, BrowserStack etc.). Cloud-Nutzung nur freiwillig und explizit durch Umgebungsvariablen aktiviert. Eigentum an Code, Logs, Screenshots und Rechenleistung bleibt beim Ausführenden.",
+  "programmeinstiegspunkt": "dist/index.js",
+  "typschnittstellen": "dist/index.d.ts",
+  "ausführungsumgebungen": {
+    "node": ">=20.11.0 <23",
+    "npm": ">=10.2"
+  },
+  "befehle": {
+    "starten": "node dist/index.js",
+    "bauen": "tsc --build",
+    "entwickeln": "ts-node-dev --respawn --transpile-only --prefer-ts src/index.ts",
+    "testen": "npm run bauen && node dist/index.js",
+    "testen-kopflos": "cross-env KOPFLOS=1 npm test",
+    "testen-lokal-nur": "cross-env KEINE_CLOUD=1 npm test",
+    "prüfen": "eslint \"src/**/*.ts\"",
+    "prüfen-korrigieren": "eslint \"src/**/*.ts\" --fix",
+    "formatieren": "prettier --write \"src/**/*.ts\"",
+    "vorbereiten-git-hooks": "husky install",
+    "sicherheitsupdate": "npm audit fix --force"
+  },
+  "archiv": {
+    "typ": "git",
+    "adresse": "git+https://github.com/4msha/selbstbestimmte-browser-automatisierung.git"
+  },
+  "schlagworte": [
+    "selenium",
+    "webdriver",
+    "automatisierung",
+    "browser-tests",
+    "selbstverantwortung",
+    "souveränität",
+    "lokal-first",
+    "eigentum",
+    "minimalismus"
+  ],
+  "autor": "Freiheitsliebender Entwickler <freiheit@selbstbestimmt.dev>[](https://github.com/4msha)",
+  "lizenz": "MIT",
+  "fehlerberichte": {
+    "adresse": "https://github.com/4msha/selbstbestimmte-browser-automatisierung/issues"
+  },
+  "projektseite": "https://github.com/4msha/selbstbestimmte-browser-automatisierung#readme",
+  "direkte_abhängigkeiten": {
+    "selenium-webdriver": "^4.28.0"
+  },
+  "entwicklungs_abhängigkeiten": {
+    "@types/node": "^22.7.4",
+    "@types/selenium-webdriver": "^4.1.28",
+    "@typescript-eslint/eslint-plugin": "^8.8.1",
+    "@typescript-eslint/parser": "^8.8.1",
+    "cross-env": "^7.0.3",
+    "eslint": "^9.11.1",
+    "eslint-config-prettier": "^9.1.0",
+    "husky": "^9.1.6",
+    "lint-staged": "^15.2.10",
+    "prettier": "^3.3.3",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.6.3"
+  },
+  "git-hooks": {
+    "*.ts": [
+      "eslint --fix",
+      "prettier --write"
+    ]
+  },
+  "hinweise_fuer_nutzer": {
+    "grundprinzip": "Lokal ist der Standard. Cloud nur bei bewusster, freiwilliger Entscheidung.",
+    "cloud-aktivierung": "Setze USE_CLOUD_GRID=1 und gib GRID_BENUTZER + GRID_SCHLUESSEL an – sonst bleibt alles lokal.",
+    "empfohlene_node_version": "Node 20 LTS (Iron) oder Node 22 LTS (wenn stabil) – vermeide Bleeding-Edge.",
+    "keine_telemetrie": "Kein automatisches Senden von Daten an Dritte. Keine Video-/Screenshot-Uploads ohne explizite Zustimmung."
+  }
+}

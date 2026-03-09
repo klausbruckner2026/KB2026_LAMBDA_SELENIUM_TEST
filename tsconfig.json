@@ -1,0 +1,127 @@
+{
+  // ╔════════════════════════════════════════════════════════════════════════════╗
+  // ║                  Souveräne & überdetaillierte tsconfig.json                ║
+  // ║                                                                            ║
+  // ║ Philosophie:                                                               ║
+  // ║ • Strenge Typisierung als Standard – keine stillschweigenden Any-Werte    ║
+  // ║ • Lokale Kontrolle über Ausgabeverzeichnis und Modulstruktur              ║
+  // ║ • Keine versteckte Magie – jede Einstellung ist bewusst gewählt           ║
+  // ║ • Eigentum am Code: Alles explizit, nichts implizit delegiert             ║
+  // ║ • Konservativ: Stabile, bewährte Einstellungen bevorzugt                  ║
+  // ╚════════════════════════════════════════════════════════════════════════════╝
+
+  "compilerOptions": {
+    // ── Sprachversion & Ziel-JavaScript ────────────────────────────────────────
+    "target": "ES2022",                     // Moderne, aber stabile ECMAScript-Version – ES2023/ES2024 nur bei Bedarf
+    "lib": [
+      "ES2023",                             // Neuere Standard-Bibliothek (inkl. ES2022 + Ergänzungen)
+      "DOM",                                // Browser-APIs (window, document, fetch, …)
+      "DOM.Iterable",                       // Für for..of auf DOM-Collections
+      "ScriptHost"                          // ActiveXObject & Co. – nur wenn wirklich nötig
+    ],
+
+    // ── Modulsystem & Auflösung ────────────────────────────────────────────────
+    "module": "NodeNext",                   // Modernes Node.js-Modulsystem (ESM + CJS-Interoperabilität)
+    "moduleResolution": "NodeNext",         // Entspricht package.json "type": "module" + extensions
+    "moduleDetection": "force",             // Erzwingt ESM-Verhalten – keine .js → .mjs Verwirrung
+
+    // ── Ausgabe & Struktur ─────────────────────────────────────────────────────
+    "outDir": "./dist",                     // Alles Kompilierte landet hier – sauber getrennt
+    "rootDir": "./src",                     // Quellcode liegt ausschließlich hier – klare Trennung
+    "declaration": true,                    // .d.ts Dateien erzeugen – wichtig für Bibliotheken
+    "declarationMap": true,                 // Sourcemaps für Typdefinitionen – Debugging in Konsumenten
+    "sourceMap": true,                      // Sourcemaps für JS → zurück zum Original-TS
+    "inlineSourceMap": false,               // Keine inline Maps – hält .js Dateien klein
+    "inlineSources": false,                 // Quellcode nicht in .js einbetten – Eigentum bleibt klar
+
+    // ── Strenge & Sicherheit ───────────────────────────────────────────────────
+    "strict": true,                         // Alles an: noImplicitAny, strictNullChecks, …
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "strictPropertyInitialization": true,
+    "noImplicitThis": true,
+    "useUnknownInCatchVariables": true,
+    "alwaysStrict": true,                   // "use strict" in jedem File
+
+    // ── Weitere Sicherheits- & Qualitätsregeln ─────────────────────────────────
+    "noUnusedLocals": true,                 // Keine toten Variablen
+    "noUnusedParameters": true,             // Keine ungenutzten Parameter
+    "noImplicitReturns": true,              // Jede Codepfad muss return haben oder throw
+    "noFallthroughCasesInSwitch": true,     // Kein versehentliches Durchfallen in switch
+    "noUncheckedIndexedAccess": true,       // obj[key] ohne keyof-Check → Fehler
+    "noPropertyAccessFromIndexSignature": true,
+    "exactOptionalPropertyTypes": true,     // Optional props sind wirklich optional (undefined)
+    "noImplicitOverride": true,             // override muss explizit markiert werden
+
+    // ── Interoperabilität & Kompatibilität ─────────────────────────────────────
+    "esModuleInterop": true,                // Hilft bei CommonJS → ESM Interop
+    "allowSyntheticDefaultImports": true,   // import React from 'react' statt import * as React
+    "resolveJsonModule": true,              // import data from './data.json'
+    "allowImportingTsExtensions": true,     // import { x } from './foo.ts' erlaubt (NodeNext)
+    "allowArbitraryExtensions": true,       // .vue, .css usw. als Module behandeln
+
+    // ── Ausgabe-Optimierungen ──────────────────────────────────────────────────
+    "removeComments": false,                // Kommentare bleiben drin – Dokumentation ist Eigentum
+    "preserveConstEnums": true,             // const enum bleibt als Objekt erhalten
+    "isolatedModules": true,                // Jede Datei kann einzeln transpiliert werden (Babel, esbuild, SWC)
+    "incremental": true,                    // .tsbuildinfo Datei → schnelleres Rebuild
+    "tsBuildInfoFile": "./.cache/tsconfig.tsbuildinfo", // Cache außerhalb von dist
+
+    // ── Sonstiges / Feintuning ─────────────────────────────────────────────────
+    "skipLibCheck": true,                   // Typen von node_modules nicht prüfen – spart sehr viel Zeit
+    "forceConsistentCasingInFileNames": true, // Dateisystem-Konsistenz (wichtig auf macOS/Linux)
+    "allowJs": false,                       // Nur .ts / .tsx – keine .js Dateien kompilieren
+    "checkJs": false,                       // Keine Typprüfung in .js Dateien
+    "baseUrl": ".",                         // Basis für nicht-relative Imports
+    "paths": {
+      "@/*": ["src/*"],                     // schöner als ../../../../../…
+      "#internals/*": ["src/internals/*"]
+    },
+    "typeRoots": [
+      "./node_modules/@types",
+      "./types"                             // Eigene Typdefinitionen hier ablegen
+    ],
+    "types": [
+      "node"                                // Nur explizit benötigte @types Pakete
+    ],
+
+    // ── Experimentelle / zukünftige Features (2026) ─────────────────────────────
+    "useDefineForClassFields": true,        // Moderne Class Fields Semantik
+    "emitDecoratorMetadata": true,          // Für reflect-metadata / Dependency Injection
+    "experimentalDecorators": true,         // Klassische Decorators (nicht stage 3)
+    "noFallthroughCasesInSwitch": true
+  },
+
+  // ── Dateien ein-/ausschließen ────────────────────────────────────────────────
+  "include": [
+    "src/**/*",
+    "tests/**/*",
+    "scripts/**/*.ts",
+    "types/**/*.d.ts"
+  ],
+
+  "exclude": [
+    "node_modules",
+    "dist",
+    "coverage",
+    "build",
+    ".cache",
+    "**/*.spec.ts",           // Nur wenn du .test.ts bevorzugst
+    "**/*.test.ts"            // Oder umgekehrt – hier beide ausgeschlossen
+  ],
+
+  // ── Vererbung / Referenzen (für Monorepo oder Composite Project) ─────────────
+  "references": [
+    // { "path": "../shared-lib" },        // Beispiel für composite project
+    // { "path": "../utils" }
+  ],
+
+  // ── Build-Modi (Composite / Build-Info) ──────────────────────────────────────
+  "compileOnSave": false,                   // Kein automatisches Kompilieren bei Speichern
+  "buildOptions": {
+    "incremental": true,
+    "tsBuildInfoFile": "./.cache/tsconfig.tsbuildinfo"
+  }
+}
