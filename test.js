@@ -704,4 +704,3 @@ module.exports = {
   findeSprachSelektor,
   erzeugeTreiber
 };
-```
