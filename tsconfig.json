@@ -1,15 +1,4 @@
 {
-  // ╔════════════════════════════════════════════════════════════════════════════╗
-  // ║                  Souveräne & überdetaillierte tsconfig.json                ║
-  // ║                                                                            ║
-  // ║ Philosophie:                                                               ║
-  // ║ • Strenge Typisierung als Standard – keine stillschweigenden Any-Werte    ║
-  // ║ • Lokale Kontrolle über Ausgabeverzeichnis und Modulstruktur              ║
-  // ║ • Keine versteckte Magie – jede Einstellung ist bewusst gewählt           ║
-  // ║ • Eigentum am Code: Alles explizit, nichts implizit delegiert             ║
-  // ║ • Konservativ: Stabile, bewährte Einstellungen bevorzugt                  ║
-  // ╚════════════════════════════════════════════════════════════════════════════╝
-
   "compilerOptions": {
     // ── Sprachversion & Ziel-JavaScript ────────────────────────────────────────
     "target": "ES2022",                     // Moderne, aber stabile ECMAScript-Version – ES2023/ES2024 nur bei Bedarf
